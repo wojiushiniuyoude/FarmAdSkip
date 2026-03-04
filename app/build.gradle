@@ -1,0 +1,41 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'io.github.huajiqaq.farmadskip'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "io.github.huajiqaq.farmadskip"
+        minSdk 21
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig = signingConfigs.getByName("debug")
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
+            def appName = "FarmAdSkip"
+            def versionName = variant.versionName
+            def apkName = "${appName}_${versionName}.apk"
+            outputFileName = apkName
+        }
+    }
+}
+
+dependencies {
+    compileOnly(files("libs/api-82.jar"))
+}
